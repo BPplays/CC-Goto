@@ -4,7 +4,10 @@ function gotoapi(gx, gy, gz, enddirlet)
     local r = 1
     tru = 1
     local tturned = 0
-    rednet.open("left")
+    local modems = { peripheral.find("modem", function(name, modem)
+      return modem.isWireless() -- Check this modem is wireless.
+    end) }
+    rednet.open(modems[1])
     local cx,cy,cz = gps.locate(2,false)
     if (gx and gy and gz) == nil then
       print("Incorrect usage of Function.")
